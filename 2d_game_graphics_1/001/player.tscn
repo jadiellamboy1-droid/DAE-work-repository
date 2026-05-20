@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bduoc6m7oihom"]
+
+[sub_resource type="GDScript" id="GDScript_4flbx"]
+script/source = "extends CharacterBody2D
+
+const SPEED = 800.0
+var bullet_scene = preload(\"res://bullet.tscn\")
+
+func _physics_process(_delta):
+	var direction = Vector2.ZERO
+	if Input.is_key_pressed(KEY_D): direction.x += 1
+	if Input.is_key_pressed(KEY_A): direction.x -= 1
+	if Input.is_key_pressed(KEY_S): direction.y += 1
+	if Input.is_key_pressed(KEY_W): direction.y -= 1
+	
+	velocity = direction.normalized() * SPEED
+	move_and_slide()
+	
+	var mouse = get_global_mouse_position()
+	rotation = (mouse - global_position).angle()
+
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			var bullet = bullet_scene.instantiate()
+			bullet.position = global_position
+			bullet.direction = (get_global_mouse_position() - global_position).normalized()
+			get_parent().add_child(bullet)
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sh265"]
+load_path = "res://.godot/imported/tilemap_packed.png-c13e4ccd642336f7da8bf6f1a73415f8.ctex"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
+
+[node name="player" type="CharacterBody2D" unique_id=106983752 groups=["player"]]
+motion_mode = 1
+script = SubResource("GDScript_4flbx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1343480304]
+scale = Vector2(3, 3)
+texture = SubResource("CompressedTexture2D_sh265")
+region_enabled = true
+region_rect = Rect2(192, 80, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=584922672]
+shape = SubResource("CircleShape2D_hqtel")

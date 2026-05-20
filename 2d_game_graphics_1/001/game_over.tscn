@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://clht15rbw7511"]
+
+[ext_resource type="Script" uid="uid://cyp4xdlcpt25e" path="res://game_over.gd" id="1_y26ei"]
+
+[node name="game over" type="Control" unique_id=415563556]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_y26ei")
+
+[node name="title" type="Label" parent="." unique_id=508914335]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="scorelabel" type="Label" parent="." unique_id=2081323341]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="restartbutton" type="Button" parent="." unique_id=2011841414]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "restart"
+
+[connection signal="pressed" from="restartbutton" to="." method="_on_restartbutton_pressed"]

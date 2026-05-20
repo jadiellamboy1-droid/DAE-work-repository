@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://nxhswj2dli0q"]
+
+[ext_resource type="Script" uid="uid://vh3wn4lqt2ae" path="res://world.gd" id="1_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://bduoc6m7oihom" path="res://player.tscn" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://b42gqu7cfu01q" path="res://player.gd" id="2_tlwt5"]
+
+[node name="world" type="Node2D" unique_id=397883522]
+script = ExtResource("1_aqk2v")
+
+[node name="player" parent="." unique_id=106983752 instance=ExtResource("1_f3sb7")]
+script = ExtResource("2_tlwt5")
+
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=1455273322]
+position_smoothing_enabled = true
+
+[node name="Timer" type="Timer" parent="." unique_id=2092609882]
+wait_time = 2.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2147088764]
+
+[node name="health" type="Label" parent="CanvasLayer" unique_id=2102845034]
+custom_minimum_size = Vector2(20, 50)
+offset_left = -226.0
+offset_top = -125.0
+offset_right = -186.0
+offset_bottom = -75.0
+theme_override_font_sizes/font_size = 24
+
+[node name="score" type="Label" parent="CanvasLayer" unique_id=951020991]
+offset_left = -108.0
+offset_top = -112.0
+offset_right = -19.0
+offset_bottom = -78.0
+theme_override_font_sizes/font_size = 24
+text = "score: 0"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
